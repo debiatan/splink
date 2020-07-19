@@ -118,7 +118,7 @@ _R_CompilerShader(GLenum shader_kind, char *source)
     char error[1024] = {0};
     log_length = ClampTop(log_length, sizeof(error));
     glGetShaderInfoLog(shader, log_length, 0, error);
-    Assert(log_length == 0);
+    Assert(log_length == 0 || error[0] == 0);
     
     return(shader);
 }
@@ -154,7 +154,7 @@ R_Init(M_Arena *arena)
     char error[1024] = {0};
     log_length = ClampTop(log_length, sizeof(error));
     glGetProgramInfoLog(program, log_length, 0, error);
-    Assert(log_length == 0);
+    Assert(log_length == 0 || error[0] == 0);
     
     {
         u64 bind_count = sizeof(r_gl_mono_texture)/sizeof(R_GL_Bind);
